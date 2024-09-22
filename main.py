@@ -86,9 +86,11 @@ def generate_response(model, input_tokens, prompt_input_text):
         text_area_main_user_input.delete('1.0', tk.END)
 
 #THREADING
+#Threading Send message, so the stop button can work at the same time
 def send_message_threaded():
     threading.Thread(target=send_message).start()
 
+#Threading the Clear Responses button so it plays sound at the same time
 def clearGtext_threaded():
     threading.Thread(target=clearGtext).start()
      
@@ -109,9 +111,6 @@ def send_message():
     generate_response(model, input_tokens, user_prompt_input_text)
 
 
-#Sound for button
-def play():
-    playsound('fire.mp3')
 
 #Stop Genereated text
 def stopProg():
@@ -194,10 +193,10 @@ def main():
 
     #Change colors for GUI
     my_white = "white"
-    my_dark_blue = "#aa553d"
+    my_orange = "#aa553d"
     my_yellow = "#f1dc92"
 
-    text_area_display.config(background=my_dark_blue, foreground=my_white, font= ("Papyrus", 11))
+    text_area_display.config(background=my_orange, foreground=my_white, font= ("Papyrus", 11))
 
     #scrollbar properties
     scrollbar_frame_display.config(command=text_area_display.yview)
@@ -211,7 +210,7 @@ def main():
     frame_controls = tk.Frame(root)
 
     #Display LLM being used
-    model_path_label = tk.Label(frame_controls, text="Model Path: " + model_path, foreground=my_dark_blue, font=("Parchment", 35))
+    model_path_label = tk.Label(frame_controls, text="Model Path: " + model_path, foreground=my_orange, font=("Parchment", 35))
 
     #placing label we made in frame
     model_path_label.pack(side=tk.LEFT, padx=10)
@@ -231,7 +230,7 @@ def main():
     text_area_main_user_input = scrolledtext.ScrolledText(frame_main_user_input, width=128, height=5, yscrollcommand=scrollbar_main_user_input.set)
 
     #Text area bg/fg color and font
-    text_area_main_user_input.config(background=my_dark_blue, foreground=my_yellow, font=("Papyrus", 12))
+    text_area_main_user_input.config(background=my_orange, foreground=my_yellow, font=("Papyrus", 12))
 
     scrollbar_main_user_input.config(command=text_area_main_user_input.yview)
 
